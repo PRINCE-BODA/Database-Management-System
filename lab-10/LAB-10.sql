@@ -1,90 +1,81 @@
-CREATE TABLE STUDENT_INFO(
-   RNo INT,
-   Name VARCHAR(50),
-   Branch VARCHAR(50),
-   SPI DECIMAL(5,2),
-   Bklog INT
+
+CREATE TABLE STUDENT_INF(
+	ROLL_NO INT,
+	NAME VARCHAR(50),
+	BRANCH VARCHAR(50),
+	SPI DECIMAL(5,2),
+	BACKLOG INT
 );
-INSERT INTO STUDENT_INFO VALUES(101 ,'Raju', 'CE', 8.80, 0),
-								(102, 'Amit', 'CE', 2.20 ,3),
-								(103,' Sanjay',' ME', 1.50, 6),
-								(104 ,'Neha',' EC' ,7.65, 1),
-								(105 ,'Meera ','EE' ,5.52, 2),
-								(106 ,'Mahesh', 'EC' ,4.50, 3)
---Create a view Personal with all columns.
- CREATE VIEW Personal
- AS
-SELECT * FROM STUDENT_INFO
-SELECT * FROM Personal
 
---Create a view Student_Details having columns Name, Branch & SPI. 
- CREATE VIEW Student_Details
- AS
- SELECT Name, Branch ,SPI FROM STUDENT_INFO
- SELECT * FROM Student_Details
+INSERT INTO STUDENT_INF VALUES (101,'RAJU','CE',8.80,0),
+								(102,'Amit','CE',2.20,3),
+								(103,'Sanjay','ME',1.50,6),
+								(104,'Neha','EC',7.65,1),
+								(105,'Meera','EE',5.52,2),
+								(106,'Mahesh','EE',4.50,3)
+								
+								SELECT * FROM STUDENT_INF
 
+--1. Create a view Personal with all columns.
+ CREATE VIEW Personal AS 
+ SELECT * FROM STUDENT_INF
 
- --Create a view AcademicData having columns RNo, Name, Branch.
- CREATE VIEW AcademicData
- AS
- SELECT RNo,Name, Branch FROM STUDENT_INFO
- SELECT * FROM AcademicData
+--2. Create a view Student_Details having columns Name, Branch & SPI.
+ CREATE VIEW Student_Detail AS 
+ SELECT NAME,BRANCH,SPI FROM STUDENT_INF
 
- --4. Create a view Student_ bklog having all columns but students whose bklog more than 2.
- CREATE VIEW Student_bklog
- AS
- SELECT * FROM STUDENT_INFO WHERE Bklog>2
- SELECT * FROM Student_bklog
+--3. Create a view AcademicData having columns RNo, Name, Branch.
+ Create view AcademicData AS
+ SELECT ROLL_NO,NAME,BRANCH FROM STUDENT_INF
 
- --5. Create a view Student_Pattern having RNo, Name & Branch columns in which Name consists of four letters.
- CREATE VIEW Student_Pattern
- AS
- SELECT RNo,Name, Branch FROM STUDENT_INFO WHERE Name LIKE '____'
- SELECT * FROM Student_Pattern
+--4. Create a view Student_ bklog having all columns but students whose bklog more than 2.
+ Create  view Student_BACKLOG AS
+ SELECT * FROM  STUDENT_INF WHERE BACKLOG>2
 
- --6. Insert a new record to AcademicData view. (107, Meet, ME)
-INSERT INTO AcademicData VALUES(107, 'Meet', 'ME')
- SELECT * FROM AcademicData
+--5. Create a view Student_Pattern having RNo, Name & Branch columns in which Name consists of four 
+--letters.
+ Create view Student_PatterRn AS
+ SELECT ROLL_NO,NAME,BRANCH FROM Student_INF WHERE  NAME  LIKE '____'
 
- --7 Update the branch of Amit from CE to ME in Student_Details view
- UPDATE Student_Details SET Branch='ME' WHERE NAME='AMIT'
-  SELECT * FROM Student_Details
+--6. Insert a new record to AcademicData view. (107, Meet, ME)
+ INSERT INTO AcademicDatA VALUES(107,'MEET','ME')
+ SELECT * FROM AcademicDatA
 
-  --8. Delete a student whose roll number is 104 from AcademicData view.
-DELETE FROM AcademicData WHERE RNo=104
+--7. Update the branch of Amit from CE to ME in Student_Details view.
+UPDATE Student_Detail SET BRANCH = 'ME' FROM Student_Detail WHERE NAME='AMIT'
 
---PART B--
+select * from  Resalt_EC
+
+--8. Delete a student whose roll number is 104 from AcademicData view.
+delete from AcademicData where ROLL_NO=104
+  
+
+-- Part – B:
 
 --1. Create a view that displays information of all students whose SPI is above 8.5
-   CREATE VIEW students
-   AS
-   SELECT SPI FROM STUDENT_INFO WHERE SPI>8.5
+CREATE VIEW information AS 
+SELECT * FROM STUDENT_INF WHERE SPI>8.5
+
 --2. Create a view that displays 0 backlog students.
-   CREATE VIEW students
-   AS
-   SELECT Bklog FROM STUDENT_INFO WHERE Bklog=0
+CREATE VIEW BACJLG AS 
+SELECT * FROM STUDENT_INF WHERE BACKLOG=0
 
 --3. Create a view Computerview that displays CE branch data only.
- CREATE VIEW Computerview
-   AS
-   SELECT branch FROM STUDENT_INFO WHERE branch='CE'
-   SELECT * FROM Computerview
---PART C--
+ Create  view Computerrview AS 
+ SELECT * FROM STUDENT_INF WHERE BRANCH='CE'
 
+--Part – C:
 --1. Create a view Result_EC that displays the name and SPI of students with SPI less than 5 of branch EC.
-   CREATE VIEW Result_EC
-   AS
-   SELECT SPI,NAME  FROM STUDENT_INFO WHERE SPI<5 AND branch='EC'
-   SELECT * FROM Result_EC
+CREATE VIEW Result_EC AS 
+SELECT SPI,name fROM STUDENT_INF WHERE SPI<5 AND BRANCH='EE'
+select * from Result_EC
+
+
 --2. Update the result of student MAHESH to 4.90 in Result_EC view.
-    UPDATE Result_EC SET SPI=4.90 WHERE NAME='Mahesh'
+UPDATE Result_EC SET SPI= 4.90 WHERE NAME='MAHESH'
 
+--3. Create a view Stu_Bklog with RNo, Name and Bklog columns in which name starts with ‘M’ and having bklogs more thaCE
+CREATE VIEW Stu_Bklog AS 
+SELECT ROLL_NO,NAME,BACKLOG 
 
---3. Create a view Stu_Bklog with RNo, Name and Bklog columns in which name starts with ‘M’ and having bklogs more than 5.
-   CREATE VIEW Stu_Bklog
-   AS
-   SELECT RNo,NAME,Bklog  FROM STUDENT_INFO WHERE NAME LIKE 'M%' AND Bklog>5
-     SELECT * FROM Stu_Bklog
-
---4. Drop Computerview form the database.
-  DROP VIEW Computerview
+--4. Drop Computerview form the database
